@@ -1,5 +1,5 @@
 - name: configure backend server
-  hosta: backend
+  hosts: backend
   become: yes
   tasks:
   - name: disable default nodejs
@@ -10,10 +10,9 @@
 
   - name: install nodejs
     ansible.builtin.package:
-      name: nodejs
+      name: "{{ item }}"
       state: present
-
+  
   - name: create expense user
-    ansible.builtin.user:    
-       name: expense
-
+    ansible.builtin.user:
+      name: expense
